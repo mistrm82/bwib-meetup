@@ -1,0 +1,76 @@
+---
+title: "Shiny example for expression object"
+output: html_notebook
+---
+
+In RNAseq normaly you use expression set objects like SummarizedExperiment.
+
+http://kasperdanielhansen.github.io/genbioconductor/html/SummarizedExperiment.html
+
+![scheme](http://www.nature.com/nmeth/journal/v12/n2/images/nmeth.3252-F2.jpg)
+
+
+```{r install, warning=FALSE, message=FALSE, eval=FALSE}
+source("http://www.bioconductor.org/biocLite.R")
+biocLite(c("GenomicRanges", "airway", "DESeq2"))
+```
+
+```{r load, warning=FALSE, message=FALSE}
+library(airway)
+data(airway)
+airway
+```
+
+Experimental design
+
+```{r coldata, warning=FALSE, message=FALSE}
+colData(airway)
+```
+
+count
+
+```{r counts, warning=FALSE, message=FALSE}
+assays(airway)
+head(assay(airway, "counts"))
+```
+
+Normalize with deseq2
+```{r normalize, warning=FALSE, message=FALSE}
+library(DESeq2)
+dds <- DESeqDataSetFromMatrix(assay(airway, "counts"), 
+                              colData(airway), design = ~ cell + dex)
+dds_rlog <- rlog(dds)
+```
+
+Create object with normalize data
+```{r create-object, warning=FALSE, message=FALSE}
+se <- SummarizedExperiment(assays = SimpleList(counts=assay(dds_rlog)),
+                            colData = colData(dds))
+head(assays(se)[[1]])
+save(se, file="rnaseq.rda")
+```
+
+Create data for an specific gene
+```{r select, warning=FALSE, message=FALSE}
+counts <- assays(se)[[1]]
+design <- colData(se)
+exp <- (unlist(counts["ENSG00000000419",]))
+xaxis <- design[,"dex"]
+color <- design[,"cell"]
+
+df <- data.frame(exp=exp,xaxis=xaxis,color=color)
+```
+
+Plot gene
+```{r, warning=FALSE, message=FALSE}
+ggplot(df, aes(factor(xaxis), exp, color=color)) +
+            geom_jitter(aes(group=color),size=1) +
+            stat_smooth(aes(x=factor(xaxis), y=exp, group=color),size=0.3, fill="grey80") +
+            geom_boxplot(aes(fill=color),alpha = 0.2) +
+            theme_bw(base_size = 7) +
+            scale_color_brewer(palette="Set1")+
+            theme_bw(base_size = 16, base_family = "serif") +
+            labs(list(y="abundance",x=""))
+```
+
+Best introduction to shiny: http://shiny.rstudio.com
