@@ -1,5 +1,7 @@
 #https://gist.github.com/jcheng5/4050398
 library(ggplot2)
+library(SummarizedExperiment)
+
 options(shiny.maxRequestSize = -1)
 shinyServer(function(input, output, session) {
 

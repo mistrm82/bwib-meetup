@@ -17,6 +17,8 @@ biocLite(c("GenomicRanges", "airway", "DESeq2"))
 
 ```{r load, warning=FALSE, message=FALSE}
 library(airway)
+library(DESeq2)
+library(SummarizedExperiment)
 data(airway)
 airway
 ```
@@ -36,7 +38,6 @@ head(assay(airway, "counts"))
 
 Normalize with deseq2
 ```{r normalize, warning=FALSE, message=FALSE}
-library(DESeq2)
 dds <- DESeqDataSetFromMatrix(assay(airway, "counts"), 
                               colData(airway), design = ~ cell + dex)
 dds_rlog <- rlog(dds)
