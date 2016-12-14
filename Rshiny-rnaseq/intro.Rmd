@@ -12,7 +12,7 @@ http://kasperdanielhansen.github.io/genbioconductor/html/SummarizedExperiment.ht
 
 ```{r install, warning=FALSE, message=FALSE, eval=FALSE}
 source("http://www.bioconductor.org/biocLite.R")
-biocLite(c("GenomicRanges", "airway", "DESeq2"))
+biocLite(c("GenomicRanges", "airway", "DESeq2","SummarizedExperiment"))
 ```
 
 ```{r load, warning=FALSE, message=FALSE}
