@@ -16,3 +16,4 @@
     - cancer: http://www.cbioportal.org
 * Challenges for data visualization, user-specific cases:
   - Hi-C data: http://promoter.bx.psu.edu/hi-c/
+  - epigenomic data: http://epigenomegateway.wustl.edu
