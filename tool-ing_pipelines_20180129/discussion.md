@@ -12,7 +12,7 @@ Example of [nextflow](https://github.com/nextflow-io/examples)
 
 ## Sevenbridge
 
-(SevenBridge example)[https://igor.sbgenomics.com/public/apps/?__hstc=64521200.3f6c18a48e5d7ee99d319d0096e54d5b.1517344954922.1517344954922.1517344954922.1&__hssc=64521200.4.1517344954922&__hsfp=1796870082#admin/sbg-public-data/alignment-metrics-qc/?__hstc=64521200.3f6c18a48e5d7ee99d319d0096e54d5b.1517344954922.1517344954922.1517344954922.1&__hssc=64521200.4.1517344954922&__hsfp=1796870082]
+[SevenBridge example](https://igor.sbgenomics.com/public/apps/?__hstc=64521200.3f6c18a48e5d7ee99d319d0096e54d5b.1517344954922.1517344954922.1517344954922.1&__hssc=64521200.4.1517344954922&__hsfp=1796870082#admin/sbg-public-data/alignment-metrics-qc/?__hstc=64521200.3f6c18a48e5d7ee99d319d0096e54d5b.1517344954922.1517344954922.1517344954922.1&__hssc=64521200.4.1517344954922&__hsfp=1796870082)
 
 And the actual file that [configure the pipeline](https://igor.sbgenomics.com/raw/admin/sbg-public-data/alignment-metrics-qc/3).
 
