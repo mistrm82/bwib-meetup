@@ -1,0 +1,29 @@
+docker pull rocker/shiny
+docker run -p 3838:3838 -v `(pwd)`:/mount rocker/shiny 
+# test
+http://localhost:3838/
+docker ps
+# connect
+docker exec -i -t c8b9cfb16cc8 /bin/bash
+# copy new app
+cd /srv/shiny-server/
+mkdir mytest
+cd mytest
+wget https://raw.githubusercontent.com/rstudio/shiny-examples/master/006-tabsets/app.R
+cd ..
+mkdir rnaseq
+cd rnaseq
+wget https://raw.githubusercontent.com/lpantano/cambridge-bio-developer-ladies/master/Rshiny-rnaseq/app/server.R
+wget https://raw.githubusercontent.com/lpantano/cambridge-bio-developer-ladies/master/Rshiny-rnaseq/app/ui.R
+# install dependencies
+R 
+install.packages("ggplot2")
+install.packages("BiocManager")
+BiocManager::install("SummarizedExperiment")
+# exit terminal
+# test
+http://localhost:3838/rnaseq/
+# commit
+docker commit c8b9cfb16cc8  lpantano/myfirstapp:version1
+# push
+docker push lpantano/myfirstapp:version1

@@ -5,6 +5,7 @@ library(SummarizedExperiment)
 options(shiny.maxRequestSize = -1)
 shinyServer(function(input, output, session) {
 
+    # read input file
     dat <- reactive({
         if (is.null(input$files)) {
             # User has not uploaded a file yet
@@ -15,12 +16,14 @@ shinyServer(function(input, output, session) {
         updateSelectInput(session, "srccol", choices = colnames(colData(se)))
         return(se)
     })
-
+ 
+  # do something to the data
+  # select specific gene and how to color
   datasetInput <- function(se, xs, c){
       if (!is.null(se) & xs!="" & c!=""){
           counts <- assays(se)[[1]]
           design <- colData(se)
-          exp<-(unlist(counts[input$gene,]))
+          exp<-(unlist(counts[input$gene,])) # select gene
           if (sum(is.na(exp)) == 0){
               xaxis<-design[,xs]
               color<-design[,c]
@@ -31,6 +34,7 @@ shinyServer(function(input, output, session) {
     NULL
   }
 
+  # do the output (table/figure)
   output$distPlot <- renderPlot({
       df<-datasetInput(dat(), input$srcgen, input$srccol)
       if (!is.null(df)){
