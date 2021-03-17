@@ -1,3 +1,5 @@
-# cambridge-bio-developers-ladies
+# Boston-area Women in Bioinformatics (BWIB)
 
-material we talk in our meet-ups
+Previously named repo: cambridge-bio-developers-ladies
+
+Material used or talked about in past meet-ups
